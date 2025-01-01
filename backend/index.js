@@ -2,7 +2,6 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
-
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -15,13 +14,25 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 // Lista de usuários conectados
 const users = {};
 
+// Verificar se o usuário já existe
+function userExists(username) {
+  return Object.values(users).includes(username);
+}
+
+// Quando um usuário se conecta
 io.on('connection', (socket) => {
-  console.log('Um usuário se conectou:', socket.id);
+  console.log('Novo usuário conectado:', socket.id);
 
   // Quando um usuário entra no chat
   socket.on('joinChat', (username) => {
-    users[socket.id] = username; // Armazenando o nome do usuário
-    console.log(`${username} entrou no chat.`);
+    if (userExists(username)) {
+      socket.emit('alreadyJoined', 'Este nome já está em uso.');
+      return;
+    } else {
+      users[socket.id] = username;
+      socket.emit('joined', 'Você entrou no chat.');
+      io.emit('userList', Object.values(users)); // Notifica todos os usuários sobre o novo usuário
+    }
   });
 
   // Quando uma mensagem é enviada

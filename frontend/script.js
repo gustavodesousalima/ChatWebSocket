@@ -30,6 +30,22 @@ enterChatButton.addEventListener('click', () => {
   }
 });
 
+messageInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    const message = messageInput.value.trim(); // Captura a mensagem e remove espaços extras
+
+    if (message) {
+      const chatMessage = {
+        username: username,
+        text: message,
+      };
+
+      socket.emit('sendMessage', chatMessage); // Envia a mensagem para o servidor
+      messageInput.value = ''; // Limpa o campo de entrada
+    }
+  }
+});
+
 // Quando o usuário envia uma mensagem
 sendMessageButton.addEventListener('click', () => {
   const message = messageInput.value.trim(); // Captura a mensagem e remove espaços extras
@@ -45,13 +61,45 @@ sendMessageButton.addEventListener('click', () => {
   }
 });
 
+function scrollToBottom() {
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// Quando o usuário envia uma mensagem
+sendMessageButton.addEventListener('click', () => {
+  const message = messageInput.value.trim(); // Captura a mensagem e remove espaços extras
+
+  if (message) {
+    const chatMessage = {
+      username: username,
+      text: message,
+    };
+
+    socket.emit('sendMessage', chatMessage); // Envia a mensagem para o servidor
+    messageInput.value = ''; // Limpa o campo de entrada
+    scrollToBottom(); // Rola para o final após enviar a mensagem
+  }
+});
+
 // Quando o servidor envia uma mensagem
 socket.on('newMessage', (data) => {
+  const newMessage2 = document.createElement('div');
   const newMessage = document.createElement('p');
   
+//salvar meu identificador
+  
   if (data.username === username) {
+    newMessage2.textContent = `Eu`;
     newMessage.classList.add('myMessage');
+    newMessage2.classList.add('mymessagediv');
+  } else {
+    newMessage2.textContent = `${data.username}`;
+    newMessage.classList.add('otherMessage');
+    newMessage2.classList.add('otherMessagediv');
   }
-  newMessage.textContent = `${data.username}: ${data.text}`; // Exibe o nome e a mensagem
-  messagesDiv.appendChild(newMessage);
+
+  newMessage.textContent = `${data.text}`;
+  newMessage2.appendChild(newMessage);
+  messagesDiv.appendChild(newMessage2);
+  scrollToBottom();
 });

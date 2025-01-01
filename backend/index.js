@@ -3,12 +3,11 @@ const http = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
 
-// Inicializando o express e o servidor HTTP
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Servindo arquivos estáticos (ajustando o caminho da pasta)
+// Servindo os arquivos estáticos do frontend
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Lista de usuários conectados
@@ -37,8 +36,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// Handler para a função serverless
-module.exports = (req, res) => {
-  // Conectando o express com o Vercel handler
-  server.emit('request', req, res);
-};
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});

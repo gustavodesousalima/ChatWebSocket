@@ -5,7 +5,9 @@ const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  transports: ['websocket', 'polling'] // Configuração para usar WebSocket e fallback para polling
+});
 
 // Servindo os arquivos estáticos do frontend
 app.use(express.static(path.join(__dirname, '../frontend')));

@@ -1,60 +1,136 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #f4f4f9;
-  }
-  
-  .container {
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  #messages {
-    height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    background: #f9f9f9;
-  }
-  
-  .inputArea {
-    display: flex;
-    gap: 10px;
-  }
-  
-  #messageInput {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: #007bff;
-    color: white;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background: #0056b3;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #e5ddd5; /* Cor de fundo semelhante ao WhatsApp */
+}
+
+#nameSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 25%;
+  height: 30vh;
+  margin: 0 auto;
+}
+
+#nameSection h2 {
+  margin-bottom: 15px;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+#nameSection input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+#nameSection button {
+  padding: 10px;
+  width: 100%;
+  background-color: #25d366;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#nameSection button:hover {
+  background-color: #39b300;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden; /* Para garantir que os elementos internos não ultrapassem as bordas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#chatSection{
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#messages {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 75vh;
+  overflow-y: auto;
+  padding: 10px;
+  background: #dcf8c6; /* Cor de fundo das mensagens semelhante ao WhatsApp */
+  border-bottom: 1px solid #ddd;
+}
+
+#messages p {
+  font-size: 1.4rem;
+  padding: 4vh;
+}
+
+.myMessage{
+  text-align: right;
+}
+
+.hidden {
+  display: none;
+}
+
+.inputArea {
+  display: flex;
+  width: 98%;
+  height: 10vh;
+  padding: 10px;
+  background: #f0f0f0; /* Cor de fundo da área de entrada */
+  border-top: 1px solid #ddd;
+  gap: 10px;
+}
+
+#messageInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 1.6rem;
+}
+
+#messageInput::placeholder {
+  font-size: 1.6rem;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #25d366; /* Cor verde característica do botão de envio do WhatsApp */
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #128c7e; /* Cor mais escura ao passar o mouse */
+}

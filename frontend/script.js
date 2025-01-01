@@ -18,7 +18,9 @@ enterChatButton.addEventListener('click', () => {
 
   if (username) {
     nameSection.classList.add('hidden'); // Oculta a seção de nome
+    nameSection.style.display = 'none'; // Oculta a seção de nome
     chatSection.classList.remove('hidden'); // Mostra a seção do chat
+    chatSection.style.display = 'flex'; // Mostra a seção do chat
     chatWithSpan.textContent = "Todos"; // Pode ser ajustado para um nome específico se necessário
 
     // Notifica o servidor sobre o novo usuário
@@ -46,6 +48,10 @@ sendMessageButton.addEventListener('click', () => {
 // Quando o servidor envia uma mensagem
 socket.on('newMessage', (data) => {
   const newMessage = document.createElement('p');
+  
+  if (data.username === username) {
+    newMessage.classList.add('myMessage');
+  }
   newMessage.textContent = `${data.username}: ${data.text}`; // Exibe o nome e a mensagem
   messagesDiv.appendChild(newMessage);
 });

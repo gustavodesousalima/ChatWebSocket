@@ -10,7 +10,7 @@ const io = new Server(server);
 // Servindo arquivos estáticos
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Lista de usuários conectados (opcional)
+// Lista de usuários conectados
 const users = {};
 
 io.on('connection', (socket) => {
@@ -18,7 +18,7 @@ io.on('connection', (socket) => {
 
   // Quando um usuário entra no chat
   socket.on('joinChat', (username) => {
-    users[socket.id] = username; // Armazena o nome do usuário
+    users[socket.id] = username; // Armazenando o nome do usuário
     console.log(`${username} entrou no chat.`);
   });
 
@@ -32,11 +32,11 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const username = users[socket.id];
     console.log(`${username || 'Usuário desconhecido'} desconectou-se.`);
-    delete users[socket.id]; // Remove o usuário da lista
+    delete users[socket.id]; // Removendo o usuário da lista
   });
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

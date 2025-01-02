@@ -76,7 +76,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url(./assets/bg-desktop.png);
+  background-image: url(./assets/bg-desktop.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

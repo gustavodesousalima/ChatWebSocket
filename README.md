@@ -1,4 +1,4 @@
-# WebSocket Test Project
+# Chat WebSocket Project
 
 Este projeto foi desenvolvido com o objetivo de testar o uso do protocolo de comunicação WebSocket. Ele consiste em um servidor backend implementado com Node.js e um frontend estático (HTML, CSS e JavaScript). O projeto permite a interação entre usuários em tempo real através de um chat utilizando WebSocket.
 

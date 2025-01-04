@@ -104,26 +104,3 @@ socket.on('newMessage', (data) => {
   messagesDiv.appendChild(newMessage2);
   scrollToBottom();
 });
-
-// Escuta o evento de histórico de mensagens do servidor
-socket.on('messageHistory', (messages) => {
-  messages.forEach((data) => {
-    const newMessage2 = document.createElement('div');
-    const newMessage = document.createElement('p');
-
-    if (data.username === username) {
-      newMessage2.textContent = `Eu`;
-      newMessage.classList.add('myMessage');
-      newMessage2.classList.add('mymessagediv');
-    } else {
-      newMessage2.textContent = `${data.username}`;
-      newMessage.classList.add('otherMessage');
-      newMessage2.classList.add('otherMessagediv');
-    }
-
-    newMessage.textContent = `${data.message}`;
-    newMessage2.appendChild(newMessage);
-    messagesDiv.appendChild(newMessage2);
-  });
-  scrollToBottom();
-});
